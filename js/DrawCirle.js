@@ -46,14 +46,14 @@ function drawCirle()
   boouncingBallContext.closePath();
   boouncingBallContext.fill();
  
-  if(postionOnXAxis<0 || postionOnXAxis>canvasWidth) 
+  if(postionOnXAxis<(radius+5) || postionOnXAxis>canvasWidth-(radius+5) )
   {
     pointsToMoveOnXAxis=-pointsToMoveOnXAxis; 
   }
   
   postionOnXAxis+=pointsToMoveOnXAxis; 
 
-  if(postionOnYAxis<0 || postionOnYAxis>canvasHeight)
+  if(postionOnYAxis<(radius+5) || postionOnYAxis>canvasHeight-(radius+5))
   {
      pointsToMoveOnYAxis=-pointsToMoveOnYAxis;
   }
