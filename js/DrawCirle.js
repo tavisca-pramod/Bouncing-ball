@@ -17,23 +17,14 @@ var pointsToMoveOnXAxis=5;
 var pointsToMoveOnYAxis=5;
 var canvasHeight = 500;
 var canvasWidth = 500;
+var boundaryOffSet =5;
 
 
 function setContext()
 {   
     boouncingBallContext = bouncingBallCanvas.getContext('2d');
 
-    setInterval(drawCirle,100);
-
-    /*boouncingBallContext.beginPath();
-
-    boouncingBallContext.fillStyle = "#070719";
-
-    boouncingBallContext.arc(100, 100, 20, 0, Math.PI * 2, true);
-
-    boouncingBallContext.closePath();
-
-    boouncingBallContext.fill();*/
+    setInterval(drawCirle,100); 
 }
 
 function drawCirle()
@@ -46,18 +37,31 @@ function drawCirle()
   boouncingBallContext.closePath();
   boouncingBallContext.fill();
  
-  if(postionOnXAxis<(radius+5) || postionOnXAxis>canvasWidth-(radius+5) )
+  if( validateXAxisPostion)
   {
     pointsToMoveOnXAxis=-pointsToMoveOnXAxis; 
   }
-  
-  postionOnXAxis+=pointsToMoveOnXAxis; 
 
-  if(postionOnYAxis<(radius+5) || postionOnYAxis>canvasHeight-(radius+5))
+  if(validateYAxisPostion)
   {
      pointsToMoveOnYAxis=-pointsToMoveOnYAxis;
-  }
-  
-  postionOnYAxis+=pointsToMoveOnYAxis; 
+  } 
+
+  moveBall();
 }
 
+function validateXAxisPostion()
+{
+   return postionOnXAxis<(radius+boundaryOffSet) || postionOnXAxis>canvasWidth-(radius+boundaryOffSet);
+}
+
+function validateYAxisPostion()
+{
+   return postionOnYAxis<(radius+boundaryOffSet) || postionOnYAxis>canvasHeight-(radius+boundaryOffSet);
+}
+
+function moveBall()
+{
+  postionOnXAxis+=pointsToMoveOnXAxis; 
+  postionOnYAxis+=pointsToMoveOnYAxis; 
+}
