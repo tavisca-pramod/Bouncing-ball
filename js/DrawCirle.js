@@ -1,48 +1,24 @@
-﻿// set context
-//initialize the diagram
-//fill color in circle
-//draw circle
-//draw after an interval
-//move circle position
-
-var boouncingBallContext;
-
-var postionOnXAxis=50;
-var postionOnYAxis=270;
-var radius = 20;
-var startAngle =0;
-var endAngle = Math.PI*2;//THTS A FULL CIRCLE
-var clockDirection = true;
+﻿var postionOnXAxis = 60;
+var postionOnYAxis=250;
 var pointsToMoveOnXAxis=5;
 var pointsToMoveOnYAxis=5;
-var canvasHeight = 500;
-var canvasWidth = 500;
-var boundaryOffSet =5;
-
 
 function setContext()
 {   
-    boouncingBallContext = bouncingBallCanvas.getContext('2d');
-
-    setInterval(drawCirle,100); 
+  setInterval(circle,40); 
 }
 
-function drawCirle()
-{
-  boouncingBallContext.clearRect(0,0, canvasWidth,canvasHeight);
-  boouncingBallContext.beginPath();
-  boouncingBallContext.fillStyle="#070719";
-  
-  boouncingBallContext.arc(postionOnXAxis,postionOnYAxis,radius,startAngle,endAngle,clockDirection);
-  boouncingBallContext.closePath();
-  boouncingBallContext.fill();
- 
-  if( validateXAxisPostion)
+function circle(){
+       
+document.getElementsByClassName("ball")[0].style.left  = postionOnXAxis + "px";
+document.getElementsByClassName("ball")[0].style.top  = postionOnYAxis + "px";
+
+if(validateBoundaryOnXAxis())
   {
     pointsToMoveOnXAxis=-pointsToMoveOnXAxis; 
   }
 
-  if(validateYAxisPostion)
+  if(validateBoundaryOnYAxis())
   {
      pointsToMoveOnYAxis=-pointsToMoveOnYAxis;
   } 
@@ -50,18 +26,26 @@ function drawCirle()
   moveBall();
 }
 
-function validateXAxisPostion()
+function validateBoundaryOnXAxis()
 {
-   return postionOnXAxis<(radius+boundaryOffSet) || postionOnXAxis>canvasWidth-(radius+boundaryOffSet);
+  var boundaryOffSetForMax =37;
+  var boundaryOffSetForMin =15;
+  var canvasWidth = 400;
+
+  return (postionOnXAxis<boundaryOffSetForMin) || (postionOnXAxis>(canvasWidth-boundaryOffSetForMax));
 }
 
-function validateYAxisPostion()
-{
-   return postionOnYAxis<(radius+boundaryOffSet) || postionOnYAxis>canvasHeight-(radius+boundaryOffSet);
+function validateBoundaryOnYAxis()
+{  
+  var boundaryOffSetForMax =37;
+  var boundaryOffSetForMin =15;
+  var canvasHeight = 400;
+
+  return (postionOnYAxis<boundaryOffSetForMin) || (postionOnYAxis>(canvasHeight-boundaryOffSetForMax));
 }
 
 function moveBall()
 {
-  postionOnXAxis+=pointsToMoveOnXAxis; 
-  postionOnYAxis+=pointsToMoveOnYAxis; 
+  postionOnXAxis += pointsToMoveOnXAxis; 
+  postionOnYAxis  += pointsToMoveOnYAxis;    
 }
