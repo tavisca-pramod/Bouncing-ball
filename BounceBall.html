@@ -2,13 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Bouncing ball</title>   
-    <link href="css/circle.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/circle.css">
 </head>
 <body onload="setContext();">   
-	<div class="container">
-  		<div class="ball"></div>
-  	</div>
+<div id="canvas" class="canvas"></div>
 
+<select id="ballColor" >
+	<option value="">Select Ball Color</option>
+ 	<option value="red">red</option>
+ 	<option value="blue">blue</option>
+ 	<option value="black">black</option>
+ 	<option value="green">green</option> 	
+ </select>
+
+ <input type="button" id="addBallBtn" value="Add Ball"></body>
  <script type="text/javascript" src="js/DrawCirle.js"></script>
+  <script type="text/javascript" src="js/Ball.js"></script>
 </body>
 </html>

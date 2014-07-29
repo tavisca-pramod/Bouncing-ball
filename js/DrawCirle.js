@@ -1,51 +1,30 @@
-﻿var postionOnXAxis = 60;
-var postionOnYAxis=250;
-var pointsToMoveOnXAxis=5;
-var pointsToMoveOnYAxis=5;
+var canvas= null;
 
 function setContext()
 {   
-  setInterval(circle,40); 
+  var speed= 50;
+  var canvasDiv  = document.getElementById('canvas');
+  canvasWidth = canvasDiv.clientWidth;
+  canvasHeight = canvasDiv.clientHeight;
+  canvas =   new BouncingBall.Canvas(canvasWidth,canvasHeight,canvasDiv.id);
+  setInterval(circle,speed); 
 }
 
-function circle(){
-       
-document.getElementsByClassName("ball")[0].style.left  = postionOnXAxis + "px";
-document.getElementsByClassName("ball")[0].style.top  = postionOnYAxis + "px";
+var addBallBtn  = document.getElementById('addBallBtn');
+addBallBtn.onclick = function(){
+  var maxOffset = 350;
+  var minOffset = 15;
 
-if(validateBoundaryOnXAxis())
+  var ballColor  = document.getElementById('ballColor').value;
+  
+  canvas.createBall(Math.floor((Math.random() * maxOffset) + minOffset),
+  Math.floor((Math.random() * maxOffset) + minOffset), ballColor);
+}
+
+function circle(){ 
+  for( i=0,  noOfBalls = canvas.balls.length; i < noOfBalls; i++)
   {
-    pointsToMoveOnXAxis=-pointsToMoveOnXAxis; 
+    var ball = canvas.balls[i];
+    canvas.moveBall(ball)
   }
-
-  if(validateBoundaryOnYAxis())
-  {
-     pointsToMoveOnYAxis=-pointsToMoveOnYAxis;
-  } 
-
-  moveBall();
-}
-
-function validateBoundaryOnXAxis()
-{
-  var boundaryOffSetForMax =37;
-  var boundaryOffSetForMin =15;
-  var canvasWidth = 400;
-
-  return (postionOnXAxis<boundaryOffSetForMin) || (postionOnXAxis>(canvasWidth-boundaryOffSetForMax));
-}
-
-function validateBoundaryOnYAxis()
-{  
-  var boundaryOffSetForMax =37;
-  var boundaryOffSetForMin =15;
-  var canvasHeight = 400;
-
-  return (postionOnYAxis<boundaryOffSetForMin) || (postionOnYAxis>(canvasHeight-boundaryOffSetForMax));
-}
-
-function moveBall()
-{
-  postionOnXAxis += pointsToMoveOnXAxis; 
-  postionOnYAxis  += pointsToMoveOnYAxis;    
 }
